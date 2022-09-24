@@ -46,6 +46,7 @@ class ElasticCommonSchemaFormatter extends NormalizerFormatter
     {
         parent::__construct('Y-m-d\TH:i:s.uP');
         $this->tags = $tags;
+        $this->maxNormalizeDepth = 10;
     }
 
     public function useLogOriginFromContext(bool $useLogOriginFromContext): self
@@ -55,7 +56,7 @@ class ElasticCommonSchemaFormatter extends NormalizerFormatter
     }
 
     /** @inheritDoc */
-    protected function normalize($data, int $depth = 0)
+    protected function normalize($data, $depth = 0)
     {
         if ($depth > $this->maxNormalizeDepth) {
             return parent::normalize($data, $depth);
